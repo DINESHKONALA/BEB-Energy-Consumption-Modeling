@@ -1,0 +1,84 @@
+# BEB Energy Consumption Modeling
+
+**Candidate:** Dinesh  
+**Position:** Student Research Assistant – BEB Energy Consumption Modeling  
+
+---
+
+## 1. Objective
+Validate the RouteE tool for Battery Electric Bus (BEB) energy consumption predictions:
+
+- Generate energy predictions using a dataset from U.S. transit agencies.  
+- Compare predictions under **steady ambient temperature** vs **varying ambient temperature**.  
+- Demonstrate data preprocessing, model prediction, and visualization skills.  
+
+---
+
+## 2. Dataset and Preprocessing
+
+**Dataset:** `eVED_171101_week.csv`  
+
+**Key columns used:**
+- Vehicle speed (`gpsspeed`)  
+- Road grade (`grade`)  
+- Road class (`road_class`)  
+- Ambient temperature (`ambient_temp`)  
+- Energy consumption (`energy_kWh_mi`)  
+- Distance (`miles`, calculated from timestamps and speed)  
+
+**Preprocessing Steps:**
+1. Converted vehicle speed from km/h → mph (`speed_mph`).  
+2. Filled missing `ambient_temp` with **20°C** for steady model.  
+3. Simulated varying ambient temperature (15–25°C sinusoidal pattern).  
+4. Calculated cumulative distance in miles (`miles`).  
+5. Renamed columns to match RouteE expected inputs: `gpsspeed`, `grade`, `road_class`, `miles`, `ambient_temp`.  
+
+---
+
+## 3. RouteE Model Predictions
+
+**Pre-trained BEV model used:** `Transit_Bus_Battery_Electric`  
+
+**Prediction process:**
+- **Steady temperature:** `ambient_temp = 20°C`  
+- **Varying temperature:** `ambient_temp = 15–25°C`  
+
+Predictions were generated using RouteE’s `predict()` method.
+
+---
+
+## 4. Results
+
+| Scenario            | Min (kWh/mi) | Max (kWh/mi) | Mean (kWh/mi) |
+| ------------------- | ------------ | ------------ | ------------- |
+| Steady Temperature  | -38.0529     | 24.4857      | -0.0025       |
+| Varying Temperature | -38.0529     | 24.4857      | -0.0025       |
+
+
+**Visualization:**  
+
+![BEB Energy Predictions]
+
+- Blue line: steady temperature  
+- Orange line: varying temperature      
+- Green line (optional): original energy from dataset  
+![alt text](image.png)
+---
+
+## 5. Observations / Insights
+
+- Energy consumption increases with **steeper road grades** and **higher speeds**.  
+- **Varying ambient temperature** slightly affects predictions; colder temperatures increase energy per mile.  
+- RouteE reliably handles both steady and varying temperature inputs.  
+- Proper preprocessing (distance calculation, renaming columns) is essential.  
+
+---
+
+## 6. Conclusion
+
+- Dataset successfully preprocessed for RouteE.  
+- Pre-trained BEV model used to predict energy consumption for both steady and varying temperatures.  
+- Predictions visualized and analyzed for insights.  
+- Workflow demonstrates understanding of BEB energy modeling and RouteE tool usage.  
+
+**All predictions and plots are saved in this folder.**

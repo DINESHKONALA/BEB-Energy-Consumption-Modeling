@@ -1,0 +1,10 @@
+py -3.12 -m venv venv
+venv\Scripts\activate
+
+pip install pandas onnx numpy onnxruntime matplotlib
+pip install pip --upgrade
+pip install nrel.routee.powertrain
+
+
+pip install --force-reinstall onnxruntime
+pip install --force-reinstall onnxruntime-gpu
